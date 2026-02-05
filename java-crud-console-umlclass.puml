@@ -20,6 +20,8 @@ package model {
       - quantity : Integer
       - timeModified : DateTime
       + totalValue() : Double
+      + productsOut(Integer quantity) : void
+      + productsIn(Integer quantity) : void
     }
   }
   package services {
