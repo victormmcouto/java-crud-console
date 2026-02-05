@@ -1,0 +1,45 @@
+@startuml
+skinparam classAttributeIconSize 0
+package model.entities {
+  class Product {
+    - id : Integer
+    - name : String
+    - category : String
+    - price : Double
+  }
+  class Stock {
+    - products: Map<Product, Integer>
+    + totalProductStockPrice() : Double
+    + addNewProduct(product : Product) : void
+    + removeProduct(product : Product) : void
+    + eraseStock() : void
+    + stockIn(product Product, quantity : Integer) : void
+    + stockOut(product : Product, quantity : Integer) :  void
+  }
+  class MenuHandler {
+    - drawLine() : void
+    + showMenu() : void
+    + getOption() : String
+  }
+}
+package model.enums {
+  enum MenuOptions {
+    LISTAR
+    CADASTRAR
+    DELETAR
+    ADICIONAR
+    REMOVER
+    SAIR
+  }
+package model.services {
+  abstract class StockFileService {
+    - filePath : String
+    + loadData() : Stock
+    + saveData(stock : Stock) : void
+  }
+}
+
+Stock --> "0..*" Product
+StockFileService ..> Stock
+MenuOptions ..> MenuHandler
+@enduml
