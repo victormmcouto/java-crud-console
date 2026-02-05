@@ -1,69 +1,79 @@
 @startuml
 skinparam classAttributeIconSize 0
-package model.entities {
-  class Product {
-    - id : Integer
-    - name : String
-    - category : ProductCategory
-    - price : Double
+package model {
+  package entities {
+    class Product {
+      - name : String
+      - category : ProductCategory
+      - price : Double
+    }
+    class Stock {
+      + totalProductStockPrice() : Double
+      + addNewProductItem(productItem : ProductItem) : void
+      + removeProductItem(productId : Integer) : void
+      + eraseStock() : void
+      + stockIn(productId : Integer, quantity : Integer) : void
+      + stockOut(productId : Integer, quantity : Integer) :  void
+    }
+    class ProductItem {
+      - id : Integer
+      - product : Product
+      - quantity : Integer
+      - timeModified : DateTime
+    }
   }
-  class Stock {
-    + totalProductStockPrice() : Double
-    + addNewProduct(product : Product) : void
-    + removeProduct(product : Product) : void
-    + eraseStock() : void
-    + stockIn(product : Product, quantity : Integer) : void
-    + stockOut(product : Product, quantity : Integer) :  void
+  package services {
+      class StockFileService {
+      - filePath : String
+      + loadData() : Stock
+      + saveData(stock : Stock) : void
+    }
   }
-  class ProductItem {
-    - product : Product
-    - quantity : Integer
-    - timeModified : DateTime
-  }
-}
-package model.services {
-  class StockFileService {
-    - filePath : String
-    + loadData() : Stock
-    + saveData(stock : Stock) : void
+  package enums <<enums>> {
+    enum ProductCategory {
+      ROUPA
+      ELETRONICO
+      ESCRITORIO
+      COMIDA
+      BEBIDA
+      HIGIENE_PESSOAL
+      LIVRO
+    }
   }
 }
 
-package model.enums <<enums>> {
-  enum ProductCategory {
-    ROUPA
-    ELETRONICO
-    ESCRITORIO
-    COMIDA
-    BEBIDA
-    HIGIENE_PESSOAL
-    LIVRO
-  }
-}
-
-package application.ui {
+package application {
+  package application.ui {
     class MenuHandler {
     - drawLine() : void
     + showMenu() : void
-    + getOption() : String
+    }
+  }
+  package enums <<enums>> {
+    enum MenuOptions {
+      LISTAR
+      CADASTRAR
+      DELETAR
+      ADICIONAR
+      RETIRAR
+      SAIR
+    }
+  }
+  package services {
+    class UserInputService {
+      + getOption() : MenuOptions
+      + getProduct() : Product
+      + getProductItem() : ProductItem
+      + getProductItemId() : Integer
+    }
   }
 }
 
-package application.enums <<enums>> {
-  enum MenuOptions {
-    LISTAR
-    CADASTRAR
-    DELETAR
-    ADICIONAR
-    REMOVER
-    SAIR
-  }
-}
-
-ProductItem --> "1" Product
-Stock "1" o-- "-productItems\n0..*" ProductItem
+ProductItem --> "\t1" Product
+Stock "\t1" o-- "-productItems\n0..*" ProductItem
 StockFileService ..> Stock
-MenuHandler ..> MenuOptions
-
-Product ..> ProductCategory
+ProductItem ..> ProductCategory
+UserInputService ..> MenuOptions
+UserInputService ..> Product
+UserInputService ..> ProductItem
 @enduml
