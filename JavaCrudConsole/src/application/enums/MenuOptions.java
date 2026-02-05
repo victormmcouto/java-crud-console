@@ -5,6 +5,6 @@ public enum MenuOptions {
 	CADASTRAR,
 	DELETAR,
 	ADICIONAR,
-	REMOVER,
+	RETIRAR,
 	SAIR
 }
