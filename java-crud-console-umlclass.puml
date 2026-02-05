@@ -4,25 +4,52 @@ package model.entities {
   class Product {
     - id : Integer
     - name : String
-    - category : String
+    - category : ProductCategory
     - price : Double
   }
   class Stock {
-    - products: Map<Product, Integer>
     + totalProductStockPrice() : Double
     + addNewProduct(product : Product) : void
     + removeProduct(product : Product) : void
     + eraseStock() : void
-    + stockIn(product Product, quantity : Integer) : void
+    + stockIn(product : Product, quantity : Integer) : void
     + stockOut(product : Product, quantity : Integer) :  void
   }
-  class MenuHandler {
+  class ProductItem {
+    - product : Product
+    - quantity : Integer
+    - timeModified : DateTime
+  }
+}
+package model.services {
+  abstract class StockFileService <<abstract>> {
+    - filePath : String
+    + loadData() : Stock
+    + saveData(stock : Stock) : void
+  }
+}
+
+package model.enums <<enums>> {
+  enum ProductCategory {
+    ROUPA
+    ELETRÔNICO
+    ESCRITÓRIO
+    COMIDA
+    BEBIDA
+    HIGIENE_PESSOAL
+    LIVRO
+  }
+}
+
+package application.ui {
+    class MenuHandler {
     - drawLine() : void
     + showMenu() : void
     + getOption() : String
   }
 }
-package model.enums {
+
+package application.enums <<enums>> {
   enum MenuOptions {
     LISTAR
     CADASTRAR
@@ -31,15 +58,12 @@ package model.enums {
     REMOVER
     SAIR
   }
-package model.services {
-  abstract class StockFileService {
-    - filePath : String
-    + loadData() : Stock
-    + saveData(stock : Stock) : void
-  }
 }
 
-Stock --> "0..*" Product
+ProductItem --> "1" Product
+Stock "1" o-- "-productItems\n0..*" ProductItem
 StockFileService ..> Stock
-MenuOptions ..> MenuHandler
+MenuHandler ..> MenuOptions
+
+Product ..> ProductCategory
 @enduml
