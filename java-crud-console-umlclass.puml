@@ -8,7 +8,6 @@ package model {
       - price : Double
     }
     class Stock {
-      + totalProductStockPrice() : Double
       + addNewProductItem(productItem : ProductItem) : void
       + removeProductItem(productId : Integer) : void
       + eraseStock() : void
@@ -20,6 +19,7 @@ package model {
       - product : Product
       - quantity : Integer
       - timeModified : DateTime
+      + totalValue() : Double
     }
   }
   package services {
@@ -72,7 +72,7 @@ package application {
 ProductItem --> "\t1" Product
 Stock "\t1" o-- "-productItems\n0..*" ProductItem
 StockFileService ..> Stock
-ProductItem ..> ProductCategory
+Product ..> ProductCategory
 UserInputService ..> MenuOptions
 UserInputService ..> Product
 UserInputService ..> ProductItem
