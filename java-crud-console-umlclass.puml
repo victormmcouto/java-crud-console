@@ -7,12 +7,12 @@ package model {
       - category : ProductCategory
       - price : Double
     }
-    class Stock {
+    class Inventory {
       + addNewProductItem(productItem : ProductItem) : void
       + removeProductItem(productId : Integer) : void
-      + eraseStock() : void
-      + stockIn(productId : Integer, quantity : Integer) : void
-      + stockOut(productId : Integer, quantity : Integer) :  void
+      + erase() : void
+      + in(productId : Integer, quantity : Integer) : void
+      + out(productId : Integer, quantity : Integer) :  void
     }
     class ProductItem {
       - id : Integer
@@ -23,10 +23,10 @@ package model {
     }
   }
   package services {
-      class StockFileService {
+      class InventoryFileService {
       - filePath : String
-      + loadData() : Stock
-      + saveData(stock : Stock) : void
+      + loadData() : Inventory
+      + saveData(inventory : Inventory) : void
     }
   }
   package enums <<enums>> {
@@ -70,8 +70,8 @@ package application {
 }
 
 ProductItem --> "\t1" Product
-Stock "\t1" o-- "-productItems\n0..*" ProductItem
-StockFileService ..> Stock
+Inventory "\t1" o-- "-productItems\n0..*" ProductItem
+InventoryFileService ..> Inventory
 Product ..> ProductCategory
 UserInputService ..> MenuOptions
 UserInputService ..> Product
