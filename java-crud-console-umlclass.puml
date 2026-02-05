@@ -22,7 +22,7 @@ package model.entities {
   }
 }
 package model.services {
-  abstract class StockFileService <<abstract>> {
+  class StockFileService {
     - filePath : String
     + loadData() : Stock
     + saveData(stock : Stock) : void
@@ -32,8 +32,8 @@ package model.services {
 package model.enums <<enums>> {
   enum ProductCategory {
     ROUPA
-    ELETRÔNICO
-    ESCRITÓRIO
+    ELETRONICO
+    ESCRITORIO
     COMIDA
     BEBIDA
     HIGIENE_PESSOAL
