@@ -76,8 +76,6 @@ package application {
 ProductItem --> "\t1" Product
 Inventory "\t1" o-- "-productItems\n0..*" ProductItem
 InventoryFileService ..> Inventory
-InventoryFileService ..> Product
-InventoryFileService ..> ProductItem
 Product ..> ProductCategory
 UserInputService ..> MenuOptions
 UserInputService ..> Product
