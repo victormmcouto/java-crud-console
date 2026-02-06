@@ -60,7 +60,7 @@ public class Inventory {
 	public String toString() {
 		String inventoryList = "";
 		for (ProductItem productItem : productItems.values()) {
-			inventoryList += productItem.toString() + "\n";
+			inventoryList += productItem.toString() + System.lineSeparator();
 		}
 		return inventoryList;
 	}
