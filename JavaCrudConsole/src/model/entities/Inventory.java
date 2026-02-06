@@ -52,11 +52,15 @@ public class Inventory {
 		}
 	}
 	
+	public Map<Integer, ProductItem> getInventory() {
+		return productItems;
+	}
+	
 	@Override
 	public String toString() {
-		String inventoryList = "| ";
+		String inventoryList = "";
 		for (ProductItem productItem : productItems.values()) {
-			inventoryList += productItem.toString() + "| ";
+			inventoryList += productItem.toString() + "\n";
 		}
 		return inventoryList;
 	}
