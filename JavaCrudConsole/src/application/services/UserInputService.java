@@ -13,14 +13,16 @@ public class UserInputService {
 	}
 	
 	public MenuOptions getOption() {
-		MenuOptions option = null;
-		try {
+		while (true) {
 			System.out.print("Insira uma opção: ");
-			option = MenuOptions.valueOf(sc.next().toUpperCase());
-		} catch (IllegalArgumentException e) {
-			System.out.println("Insira uma opção válida!");
+			
+			try {
+				MenuOptions option = MenuOptions.valueOf(sc.next().toUpperCase());
+				return option;
+			} catch (IllegalArgumentException e) {
+				System.out.println("Insira uma opção válida!");
+			}
 		}
-		return option;
 	}
 	
 	public void closeService() {
