@@ -26,7 +26,7 @@ public class Inventory {
 		productItems.clear();
 	}
 	
-	public void stokIn(Integer productId, Integer quantity) {
+	public void stockIn(Integer productId, Integer quantity) {
 		if (productItems.containsKey(productId)) {
 			ProductItem productItem = productItems.get(productId);
 			
@@ -37,7 +37,7 @@ public class Inventory {
 		}
 	}
 	
-	public void stckOut(Integer productId, Integer quantity) {
+	public void stockOut(Integer productId, Integer quantity) {
 		if (productItems.containsKey(productId)) {
 			ProductItem productItem = productItems.get(productId);
 			
