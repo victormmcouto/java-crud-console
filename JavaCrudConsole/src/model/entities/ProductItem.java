@@ -71,10 +71,14 @@ public class ProductItem implements Comparable<ProductItem> {
 		timeModified = LocalDateTime.now();
 	}
 	
+	public String getProductItemInfo() {
+		return "ID: "  + id + "| " + product + "| Quantidade: " + quantity + 
+				"| Última modificação: " + timeModified;
+	}
+	
 	@Override
 	public String toString() {
-		return "ID: " + id + "| " + product + "| Quant. " + quantity + "| Última Alte.: "
-				+ timeModified;
+		return id + "," + product + "," + quantity + "," + timeModified;
 	}
 
 	@Override

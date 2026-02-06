@@ -40,9 +40,12 @@ public class Product {
 		this.price = price;
 	}
 	
+	public String getProductInfo() {
+		return "Nome: " + name + "| Categoria: " + category + "| Preço: " + String.format("%.2f", price) 
+	}
+	
 	@Override
 	public String toString() {
-		return "Nome: " + name + "| Categoria: " + category + "|Preço uni.: " + 
-				String.format("%.2f", price);
+		return name + "," + category + "," + String.format("%.2f", price);
 	}
 }
