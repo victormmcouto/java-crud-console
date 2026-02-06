@@ -1,7 +1,9 @@
 package model.services;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -42,12 +44,18 @@ public class InventoryFileService {
 			}
 		} catch (IOException e) {
 			System.out.println("Não foi possível executar a leitura dos dados do arquivo " + filePath);
+			System.out.println(e.getMessage());
 		}
 		
 		return inventory;
 	}
 	
 	public void saveData(Inventory inventory) {
-		
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+			bw.write(inventory.toString());
+		} catch (IOException e) {
+			System.out.println("Não foi possível realizar a escrita dos dados no arquivo " + filePath);
+			System.out.println(e.getMessage());
+		}
 	}
 }
