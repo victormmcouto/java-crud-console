@@ -12,8 +12,8 @@ package model {
       + addNewProductItem(productItem : ProductItem) : void
       + removeProductItem(productId : Integer) : void
       + erase() : void
-      + in(productId : Integer, quantity : Integer) : void
-      + out(productId : Integer, quantity : Integer) :  void
+      + stockIn(productId : Integer, quantity : Integer) : void
+      + stockOutout(productId : Integer, quantity : Integer) :  void
     }
     class ProductItem {
       - id : Integer
@@ -22,8 +22,8 @@ package model {
       - timeModified : DateTime
       + totalValue() : Double
       + getProductItemInfo() : String
-      + productsOut(Integer quantity) : void
-      + productsIn(Integer quantity) : void
+      + productsOut(quantity : Integer) : void
+      + productsIn(quantity : Integer) : void
     }
   }
   package services {
@@ -72,6 +72,10 @@ package application {
       + getQuantity() : Integer
       + closeService() : void
     }
+    class InputValidationService {
+      + validateNumber<T extends Number>(value : T, promptMsg : String, errorMsg : String) : T
+      + validateEnum<E extends Enum<E>>(value : E, promptMsg : String, errorMsg : String) : E
+    }
   }
 }
 
@@ -82,4 +86,5 @@ Product ..> ProductCategory
 UserInputService ..> MenuOptions
 UserInputService ..> Product
 UserInputService ..> ProductItem
+UserInputService ..> InputValidationService
 @enduml
