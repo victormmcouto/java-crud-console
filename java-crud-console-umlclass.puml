@@ -70,6 +70,7 @@ package application {
       + getProductItem() : ProductItem
       + getProductItemId() : Integer
       + getQuantity() : Integer
+      + closeService() : void
     }
   }
 }
