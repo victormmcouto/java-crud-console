@@ -41,7 +41,7 @@ public class Product {
 	}
 	
 	public String getProductInfo() {
-		return "Nome: " + name + "| Categoria: " + category + "| Preço: " + String.format("%.2f", price) 
+		return "Nome: " + name + "| Categoria: " + category + "| Preço: " + String.format("%.2f", price);
 	}
 	
 	@Override
