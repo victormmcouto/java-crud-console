@@ -73,8 +73,9 @@ package application {
       + closeService() : void
     }
     class InputValidationService {
-      + validateNumber<T extends Number>(value : T, tipo : Class<T>) : T
+      + validateNumber<T extends Number>(value : String, tipo : Class<T>) : T
       + validateString String (value : String) : String
+      + validateEnum<E extends Enum<E>>(value : String, tipo : Class<E>) : E
     }
   }
 }
