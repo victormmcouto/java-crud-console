@@ -25,7 +25,7 @@ public class InputValidationService {
 	
 	public String validateString(String value) {
 		if (value == null || value == "") {
-			System.out.println("Tipo não suportado");
+			System.out.println("Valor inválido!");
 		}
 		return value;
 	}
