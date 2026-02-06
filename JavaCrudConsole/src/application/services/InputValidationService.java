@@ -22,4 +22,11 @@ public class InputValidationService {
 			throw new IllegalArgumentException("Tipo não suportado");	
 		}
 	}
+	
+	public String validateString(String value) {
+		if (value == null || value == "") {
+			System.out.println("Tipo não supoertado");
+		}
+		return value;
+	}
 }
