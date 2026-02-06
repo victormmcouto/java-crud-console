@@ -1,0 +1,25 @@
+package application.services;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+public class InputValidationService {
+	public <T extends Number> T validateNumber(String value, Class<T> type) {
+		try {
+			if (type == Integer.class) {
+				return type.cast(Integer.valueOf(value));
+			} else if (type == Double.class) {
+				return type.cast(Double.valueOf(value));
+			} else if (type == Long.class) {
+				return type.cast(Long.valueOf(value));
+			} else if (type == BigDecimal.class) {
+				return type.cast(new BigDecimal(value));
+			} else if (type == BigInteger.class) {
+				return type.cast(new BigInteger(value));
+			} 
+			throw new IllegalArgumentException("Tipo não suportado");
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Tipo não suportado");	
+		}
+	}
+}
