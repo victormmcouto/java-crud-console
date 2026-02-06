@@ -21,6 +21,13 @@ public class ProductItem implements Comparable<ProductItem> {
 		this.quantity = quantity;
 		timeModified = LocalDateTime.now();
 	}
+	
+	public ProductItem(Integer id, Product product, Integer quantity, LocalDateTime timeModified) {
+		this.id = id;
+		this.product = product;
+		this.quantity = quantity;
+		this.timeModified = timeModified;
+	}
 
 	public Integer getId() {
 		return id;
