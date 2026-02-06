@@ -65,6 +65,16 @@ public class UserInputService {
 		}
 	}
 	
+	public Integer getQuantity() {
+		while (true) {
+			try {
+				return validator.validateNumber(sc.next(), Integer.class);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Valor inválido!!");
+			}
+		}
+	}
+	
 	public void closeService() {
 		sc.close();
 	}
