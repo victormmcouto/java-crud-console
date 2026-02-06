@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import application.enums.MenuOptions;
 import model.entities.Product;
+import model.entities.ProductItem;
 import model.enums.ProductCategory;
 
 public class UserInputService {
@@ -19,8 +20,7 @@ public class UserInputService {
 		while (true) {
 			System.out.print("Insira uma opção: ");			
 			try {
-				MenuOptions option = MenuOptions.valueOf(sc.next().toUpperCase());
-				return option;
+				return validator.validateEnum(sc.next(), MenuOptions.class);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Insira uma opção válida!");
 			}
@@ -35,6 +35,20 @@ public class UserInputService {
 				Double price = validator.validateNumber(sc.next(), Double.class);
 				
 				return new Product(name, category, price);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Valor inválido!!");
+			}
+		}
+	}
+	
+	public ProductItem getProductItem() {
+		while (true) {
+			try {
+				Integer id = validator.validateNumber(sc.next(), Integer.class);
+				Product product = getProduct();
+				Integer quantity = validator.validateNumber(sc.next(), Integer.class);
+				
+				return new ProductItem(id, product, quantity);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Valor inválido!!");
 			}
