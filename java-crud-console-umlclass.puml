@@ -13,7 +13,7 @@ package model {
       + removeProductItem(productId : Integer) : void
       + erase() : void
       + stockIn(productId : Integer, quantity : Integer) : void
-      + stockOutout(productId : Integer, quantity : Integer) :  void
+      + stockOutt(productId : Integer, quantity : Integer) :  void
     }
     class ProductItem {
       - id : Integer
@@ -73,8 +73,8 @@ package application {
       + closeService() : void
     }
     class InputValidationService {
-      + validateNumber<T extends Number>(value : T, promptMsg : String, errorMsg : String) : T
-      + validateEnum<E extends Enum<E>>(value : E, promptMsg : String, errorMsg : String) : E
+      + validateNumber<T extends Number>(value : T, tipo : Class<T>) : T
+      + validateString String (value : String) : String
     }
   }
 }
