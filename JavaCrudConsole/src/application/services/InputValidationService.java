@@ -25,8 +25,18 @@ public class InputValidationService {
 	
 	public String validateString(String value) {
 		if (value == null || value == "") {
-			System.out.println("Tipo não supoertado");
+			System.out.println("Tipo não suportado");
 		}
 		return value;
+	}
+	
+	public <E extends Enum<E>> E validateEnum(String value, Class<E> tipo) {
+		for (E enum_ : tipo.getEnumConstants()) {
+			if (enum_.name().equalsIgnoreCase(value)) {
+				return enum_;
+			}
+		}
+		
+		throw new IllegalArgumentException("Valor inválido!");
 	}
 }
