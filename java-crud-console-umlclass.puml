@@ -69,6 +69,7 @@ package application {
       + getProduct() : Product
       + getProductItem() : ProductItem
       + getProductItemId() : Integer
+      + getQuantity() : Integer
     }
   }
 }
