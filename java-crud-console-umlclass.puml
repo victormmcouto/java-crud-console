@@ -6,6 +6,7 @@ package model {
       - name : String
       - category : ProductCategory
       - price : Double
+      + getProductInfo() : String
     }
     class Inventory {
       + addNewProductItem(productItem : ProductItem) : void
@@ -20,6 +21,7 @@ package model {
       - quantity : Integer
       - timeModified : DateTime
       + totalValue() : Double
+      + getProductItemInfo() : String
       + productsOut(Integer quantity) : void
       + productsIn(Integer quantity) : void
     }
@@ -74,6 +76,8 @@ package application {
 ProductItem --> "\t1" Product
 Inventory "\t1" o-- "-productItems\n0..*" ProductItem
 InventoryFileService ..> Inventory
+InventoryFileService ..> Product
+InventoryFileService ..> ProductItem
 Product ..> ProductCategory
 UserInputService ..> MenuOptions
 UserInputService ..> Product
