@@ -45,6 +45,7 @@ public class InventoryFileService {
 			System.out.println("Não foi possível executar a leitura dos dados do arquivo " + filePath);
 			System.out.println("Arquivo mal formatado ou não existe!");
 			System.out.println(e.getMessage());
+			return null;
 		} 
 		
 		return inventory;
