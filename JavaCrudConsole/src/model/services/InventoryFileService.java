@@ -24,8 +24,7 @@ public class InventoryFileService {
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
-		
-			if (br.lines().count() == 0) {;
+			if (line != "") {
 				while(line != null) {
 					String[] record = line.split(",");
 					
