@@ -24,26 +24,22 @@ public class InventoryFileService {
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
-			if (line != null) {
-				while(line != null) {
-					String[] record = line.split(",");
-					
-					Integer id = Integer.parseInt(record[0]);
-					String name = record[1];
-					ProductCategory category = ProductCategory.valueOf(record[2]);
-					Double price = Double.valueOf(record[3]);
-					Integer quantity = Integer.valueOf(record[4]);
-					LocalDateTime timeModified = LocalDateTime.parse(record[5]);
-					
-					Product product = new Product(name, category, price);
-					ProductItem productItem = new ProductItem(id, product, quantity, timeModified);
-					
-					inventory.addNewProductItem(productItem);
-					
-					line = br.readLine();
-				}
-			} else {
-				System.out.println("INVENTÓRIO VAZIO!");
+			while(line != null) {
+				String[] record = line.split(",");
+				
+				Integer id = Integer.parseInt(record[0]);
+				String name = record[1];
+				ProductCategory category = ProductCategory.valueOf(record[2]);
+				Double price = Double.valueOf(record[3]);
+				Integer quantity = Integer.valueOf(record[4]);
+				LocalDateTime timeModified = LocalDateTime.parse(record[5]);
+				
+				Product product = new Product(name, category, price);
+				ProductItem productItem = new ProductItem(id, product, quantity, timeModified);
+				
+				inventory.addNewProductItem(productItem);
+				
+				line = br.readLine();
 			}
 		} catch (IllegalArgumentException | IOException e) {
 			System.out.println("Não foi possível executar a leitura dos dados do arquivo " + filePath);

@@ -58,7 +58,10 @@ public class Inventory {
 	
 	@Override
 	public String toString() {
+		if (productItems.isEmpty()) return "Inventório vazio!";
+		
 		String inventoryList = "";
+		
 		for (ProductItem productItem : productItems.values()) {
 			inventoryList += productItem.toString() + System.lineSeparator();
 		}
