@@ -24,7 +24,7 @@ public class InventoryFileService {
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
-			if (line != "") {
+			if (line != null) {
 				while(line != null) {
 					String[] record = line.split(",");
 					
@@ -43,7 +43,7 @@ public class InventoryFileService {
 					line = br.readLine();
 				}
 			} else {
-				System.out.println("Inventório vazio!");
+				System.out.println("INVENTÓRIO VAZIO!");
 			}
 		} catch (IllegalArgumentException | IOException e) {
 			System.out.println("Não foi possível executar a leitura dos dados do arquivo " + filePath);
