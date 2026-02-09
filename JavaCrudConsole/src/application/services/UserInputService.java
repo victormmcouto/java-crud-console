@@ -20,7 +20,7 @@ public class UserInputService {
 	
 	public MenuOptions getOption() {
 		while (true) {
-			System.out.print("Insira uma opção: ");			
+			output.printMessage("Insira uma opção: ");			
 			try {
 				return validator.validateEnum(sc.next(), MenuOptions.class);
 			} catch (IllegalArgumentException e) {
