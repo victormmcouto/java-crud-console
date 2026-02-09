@@ -2,6 +2,7 @@ package model.entities;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class ProductItem implements Comparable<ProductItem> {
@@ -9,6 +10,8 @@ public class ProductItem implements Comparable<ProductItem> {
 	private Product product;
 	private Integer quantity;
 	private LocalDateTime timeModified;
+	
+	private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
 
 	public ProductItem(Integer id) {
 		this.id = id;
@@ -73,7 +76,7 @@ public class ProductItem implements Comparable<ProductItem> {
 	
 	public String getProductItemInfo() {
 		return "ID: "  + id + "| " + product + "| Quantidade: " + quantity + 
-				"| Última modificação: " + timeModified;
+				"| Última modificação: " + timeModified.format(format);
 	}
 	
 	@Override
