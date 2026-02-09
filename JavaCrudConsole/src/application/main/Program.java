@@ -27,7 +27,7 @@ public class Program {
 		Boolean leave = false;
 		
 		if (inventory != null) {
-			mh.showHeader("Sistema de gerenciamento de estoque de produtos");
+			mh.showHeader("Gerenciamento de estoque de produtos");
 			while(!leave) {
 				mh.showMenu();
 				MenuOptions option = inputService.getOption();

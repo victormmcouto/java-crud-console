@@ -34,6 +34,6 @@ public class ConsoleOutputService implements OutputService {
 	}
 	
 	private void printLine() {
-		System.out.println("-".repeat(30));
+		System.out.println("-".repeat(36));
 	}
 }
