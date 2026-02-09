@@ -30,7 +30,7 @@ public class Program {
 				
 				switch (option) {
 					case LISTAR: {
-						System.out.println(inventory);
+						inventory.showInventory();
 						break;
 					} case CADASTRAR: {
 						ProductItem newProductItem = inputService.getProductItem();
