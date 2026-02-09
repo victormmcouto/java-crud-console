@@ -20,7 +20,7 @@ public class UserInputService {
 	
 	public MenuOptions getOption() {
 		while (true) {
-			output.printMessage("Insira uma opção: ");			
+			output.printInputMessage("Insira uma opção: ");			
 			try {
 				return validator.validateEnum(sc.next(), MenuOptions.class);
 			} catch (IllegalArgumentException e) {
@@ -32,13 +32,20 @@ public class UserInputService {
 	public Product getProduct() {
 		while (true) {
 			try {
+				output.printInputMessage("Nome do produto: ");
 				String name = validator.validateString(sc.next());
+
+				output.printInputMessage("CATEGORIAS -> ");
+				output.printEnum(ProductCategory.class, true);
+				output.printInputMessage("Categoria do produto: ");
 				ProductCategory category = validator.validateEnum(sc.next(), ProductCategory.class);
+
+				output.printInputMessage("Preço: ");
 				Double price = validator.validateNumber(sc.next(), Double.class);
 				
 				return new Product(name, category, price);
 			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido!!");
+				output.printError("Valor inválido!!");
 			}
 		}
 	}
@@ -46,8 +53,12 @@ public class UserInputService {
 	public ProductItem getProductItem() {
 		while (true) {
 			try {
+				output.printInputMessage("ID do produto: ");
 				Integer id = validator.validateNumber(sc.next(), Integer.class);
+				
 				Product product = getProduct();
+				
+				output.printInputMessage("Quantidade: ");
 				Integer quantity = validator.validateNumber(sc.next(), Integer.class);
 				
 				return new ProductItem(id, product, quantity);
@@ -60,9 +71,10 @@ public class UserInputService {
 	public Integer getProductItemId() {
 		while (true) {
 			try {
+				output.printInputMessage("ID do produto: ");
 				return validator.validateNumber(sc.next(), Integer.class);
 			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido!!");
+				output.printMessage("Valor inválido! Deve ser um número inteiro!");
 			}
 		}
 	}
@@ -70,9 +82,10 @@ public class UserInputService {
 	public Integer getQuantity() {
 		while (true) {
 			try {
+				output.printInputMessage("Quantidaade: ");
 				return validator.validateNumber(sc.next(), Integer.class);
 			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido!!");
+				output.printMessage("Valor inválido! Deve ser um número inteiro!");
 			}
 		}
 	}
