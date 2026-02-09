@@ -1,15 +1,15 @@
 package application.ui;
 
 import application.enums.MenuOptions;
+import application.services.OutputService;
 
 public class MenuHandler {
+	
+	private OutputService outService = new OutputService();
+	
 	public void showMenu() {
-		System.out.println("MENU");
-		drawLine('-', 50);
-		for (MenuOptions options : MenuOptions.values()) {
-			System.err.println(options);
-		}
-		drawLine('-', 50);
+		outService.printMessage(" ".repeat(13) + "MENU" + " ".repeat(13) + "\n");
+		outService.printEnum(MenuOptions.class, false);
 	}
 	
 	public void showHeader(String header) {
