@@ -17,35 +17,43 @@ public class Program {
 		
 		MenuHandler mh = new MenuHandler();
 		UserInputService inputService = new UserInputService(new Scanner(System.in));
-		InventoryFileService ifs = new InventoryFileService("C:\\Users\\victor.couto\\OneDrive - ALS Limited\\Desktop");
+		InventoryFileService ifs = new InventoryFileService("C:\\Temp\\invenotry.csv");
 		Inventory inventory = ifs.loadData();
+		
+		Boolean leave = false;
 		
 		if (inventory != null) {
 			mh.showHeader("Sistema de gerenciamento de estoque de produtos");
-			while(true) {
+			while(!leave) {
 				mh.showMenu();
 				MenuOptions option = inputService.getOption();
 				
 				switch (option) {
 					case LISTAR: {
 						System.out.println(inventory);
+						break;
 					} case CADASTRAR: {
 						ProductItem newProductItem = inputService.getProductItem();
 						inventory.addNewProductItem(newProductItem);
+						break;
 					} case DELETAR: {
 						Integer id = inputService.getProductItemId();
 						inventory.removeProductItem(id);
+						break;
 					} case ADICIONAR: {
 						Integer id = inputService.getProductItemId();
 						Integer quantity = inputService.getQuantity();
 						inventory.stockIn(id, quantity);
+						break;
 					} case RETIRAR: {
 						Integer id = inputService.getProductItemId();
 						Integer quantity = inputService.getQuantity();
 						inventory.stockOut(id, quantity);
+						break;
 					} case SAIR: {
 						ifs.saveData(inventory);
 						inputService.closeService();
+						leave = true;
 						break;
 					}
 				}
