@@ -28,6 +28,11 @@ public class ConsoleOutputService implements OutputService {
 		printLine();
 	}
 	
+	@Override
+	public void printInputMessage(String message) {
+		System.err.print(message);
+	}
+	
 	private void printLine() {
 		System.out.println("-".repeat(30));
 	}
