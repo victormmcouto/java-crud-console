@@ -14,6 +14,7 @@ package model {
       + erase() : void
       + stockIn(productId : Integer, quantity : Integer) : void
       + stockOutt(productId : Integer, quantity : Integer) :  void
+      + showInvenotry() : void
     }
     class ProductItem {
       - id : Integer
@@ -51,6 +52,7 @@ package application {
     class MenuHandler {
     - drawLine() : void
     + showMenu() : void
+    + showHeader() : void
     }
   }
   package enums <<enums>> {
