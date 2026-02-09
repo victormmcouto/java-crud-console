@@ -13,15 +13,6 @@ public class MenuHandler {
 	}
 	
 	public void showHeader(String header) {
-		drawLine('-', 0);
-		System.out.println(header.toUpperCase());
-		drawLine('-', 50);
-	}
-
-	private void drawLine(Character character, int repet) {
-		for (int i=0; i < repet; i++) {
-			System.out.print(character);
-		}
-		System.out.println();
+		outService.printMessage(header.toUpperCase());
 	}
 }
