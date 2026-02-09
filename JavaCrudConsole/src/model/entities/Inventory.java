@@ -56,6 +56,12 @@ public class Inventory {
 		return productItems;
 	}
 	
+	public void showInventory() {
+		for (ProductItem productItem : productItems.values()) {
+			System.out.println(productItem.getProductItemInfo());
+		}
+	}
+	
 	@Override
 	public String toString() {
 		if (productItems.isEmpty()) return "Inventório vazio!";
