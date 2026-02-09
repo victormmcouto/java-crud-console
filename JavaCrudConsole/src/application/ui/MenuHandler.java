@@ -13,7 +13,7 @@ public class MenuHandler {
 	
 	public void showMenu() {
 		output.printMessage(" ".repeat(16) + "MENU" + " ".repeat(16));
-		output.printEnum(MenuOptions.class, false);
+		output.printEnum(MenuOptions.class);
 	}
 	
 	public void showHeader(String header) {

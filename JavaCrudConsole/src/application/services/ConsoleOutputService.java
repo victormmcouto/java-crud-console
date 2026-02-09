@@ -9,14 +9,10 @@ public class ConsoleOutputService implements OutputService {
 	}
 	
 	@Override
-	public <E extends Enum<E>> void printEnum(Class<E> enumToShow, Boolean transpose) {
+	public <E extends Enum<E>> void printEnum(Class<E> enumToShow) {
 		printLine();
 		for (E enumItem : enumToShow.getEnumConstants()) {
-			if (transpose) {
-				System.out.print("|" + enumItem + "|");
-			} else {
 				System.out.println(enumItem);
-			}
 		}
 		printLine();
 	}

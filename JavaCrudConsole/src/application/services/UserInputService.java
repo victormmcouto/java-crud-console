@@ -35,8 +35,8 @@ public class UserInputService {
 				output.printInputMessage("Nome do produto: ");
 				String name = validator.validateString(sc.next());
 
-				output.printInputMessage("CATEGORIAS -> ");
-				output.printEnum(ProductCategory.class, true);
+				output.printMessage("CATEGORIAS -> ");
+				output.printEnum(ProductCategory.class);
 				output.printInputMessage("Categoria do produto: ");
 				ProductCategory category = validator.validateEnum(sc.next(), ProductCategory.class);
 
