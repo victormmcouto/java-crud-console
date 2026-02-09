@@ -3,7 +3,7 @@ package application.services;
 public class OutputService {
 	public void printMessage(String message) {
 		printLine();
-		System.out.print(message);
+		System.out.println(message);
 		printLine();
 	}
 	
