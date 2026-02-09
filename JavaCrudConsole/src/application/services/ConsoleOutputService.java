@@ -1,16 +1,14 @@
 package application.services;
 
-public class OutputService {
+public class ConsoleOutputService implements OutputService {
+	@Override
 	public void printMessage(String message) {
 		printLine();
 		System.out.println(message);
 		printLine();
 	}
 	
-	public void printLine() {
-		System.out.println("-".repeat(30));
-	}
-	
+	@Override
 	public <E extends Enum<E>> void printEnum(Class<E> enumToShow, Boolean transpose) {
 		printLine();
 		for (E enumItem : enumToShow.getEnumConstants()) {
@@ -21,5 +19,16 @@ public class OutputService {
 			}
 		}
 		printLine();
+	}
+	
+	@Override
+	public void printError(String message) {
+		printLine();
+		System.out.println("Erro: " + message);
+		printLine();
+	}
+	
+	private void printLine() {
+		System.out.println("-".repeat(30));
 	}
 }

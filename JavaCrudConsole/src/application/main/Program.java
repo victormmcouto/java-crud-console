@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import application.enums.MenuOptions;
+import application.services.ConsoleOutputService;
+import application.services.OutputService;
 import application.services.UserInputService;
 import application.ui.MenuHandler;
 import model.entities.Inventory;
@@ -15,10 +17,12 @@ public class Program {
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 		
-		MenuHandler mh = new MenuHandler();
-		UserInputService inputService = new UserInputService(new Scanner(System.in));
-		InventoryFileService ifs = new InventoryFileService("C:\\Temp\\invenotry.csv");
-		Inventory inventory = ifs.loadData();
+		OutputService output = new ConsoleOutputService();
+		
+		MenuHandler mh = new MenuHandler(output);
+		UserInputService inputService = new UserInputService(new Scanner(System.in), output);
+		InventoryFileService file = new InventoryFileService("C:\\Temp\\invenotry.csv", output);
+		Inventory inventory = file.loadData();
 		
 		Boolean leave = false;
 		
@@ -51,7 +55,7 @@ public class Program {
 						inventory.stockOut(id, quantity);
 						break;
 					} case SAIR: {
-						ifs.saveData(inventory);
+						file.saveData(inventory);
 						inputService.closeService();
 						leave = true;
 						break;

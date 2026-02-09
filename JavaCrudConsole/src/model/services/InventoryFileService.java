@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import application.services.OutputService;
 import model.entities.Inventory;
 import model.entities.Product;
 import model.entities.ProductItem;
@@ -14,13 +15,15 @@ import model.enums.ProductCategory;
 
 public class InventoryFileService {
 	private String filePath;
+	private OutputService output;
 	
-	public InventoryFileService(String filePath) {
+	public InventoryFileService(String filePath, OutputService output) {
 		this.filePath = filePath;
+		this.output = output;
 	}
 	
 	public Inventory loadData() {
-		Inventory inventory = new Inventory();
+		Inventory inventory = new Inventory(output);
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
@@ -44,9 +47,9 @@ public class InventoryFileService {
 				line = br.readLine();
 			}
 		} catch (IllegalArgumentException | IOException e) {
-			System.out.println("Não foi possível executar a leitura dos dados do arquivo " + filePath);
-			System.out.println("Arquivo mal formatado ou não existe!");
-			System.out.println(e.getMessage());
+			output.printError("Não foi possível executar a leitura dos dados do arquivo " + filePath + "\n" +
+							   "Arquivo mal formatado ou não existe!\n" +
+						   	   e.getMessage());
 			return null;
 		} 
 		
@@ -61,8 +64,8 @@ public class InventoryFileService {
 				bw.write("");
 			}
 		} catch (IOException e) {
-			System.out.println("Não foi possível realizar a escrita dos dados no arquivo " + filePath);
-			System.out.println(e.getMessage());
+			output.printError("Não foi possível realizar a escrita dos dados no arquivo " + filePath + "\n" +
+							  e.getMessage());
 		}
 	}
 }

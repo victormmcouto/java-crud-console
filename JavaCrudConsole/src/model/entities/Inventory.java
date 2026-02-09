@@ -10,7 +10,11 @@ import application.services.OutputService;
 public class Inventory {
 	private Map<Integer, ProductItem> productItems = new HashMap<>();
 	
-	OutputService outService = new OutputService();
+	private OutputService output;
+	
+	public Inventory(OutputService output) {
+		this.output = output;
+	}
 	
 	public Map<Integer, ProductItem> getInventory() {
 		return productItems;
@@ -20,13 +24,13 @@ public class Inventory {
 		if (!productItems.containsKey(productItem.getId())) {
 			productItems.put(productItem.getId(), productItem);
 		} else {
-			System.out.println("O produto de id " + String.format("0000", productItem.getId()) + " já existe!");
+			output.printMessage("O produto de id " + String.format("0000", productItem.getId()) + " já existe!");
 		}
 	}
 	
 	public void removeProductItem(Integer productId) {
 		if (productItems.remove(productId) == null) {
-			System.out.println("O produto de id " + String.format("0000", productId) + " não existe!");
+			output.printMessage("O produto de id " + String.format("0000", productId) + " não existe!");
 		}
 	}
 	
@@ -40,8 +44,8 @@ public class Inventory {
 			
 			productItem.productsIn(quantity);
 			
-			System.out.println("Unidades acrescentadas!");
-			System.out.println(productItem);
+			output.printMessage("Unidades acrescentadas!");
+			output.printMessage(productItem.getProductItemInfo());
 		}
 	}
 	
@@ -51,18 +55,18 @@ public class Inventory {
 			
 			try {
 				productItem.productsOut(quantity);
-				System.out.println("Unidades retiradas!");
-				System.out.println(productItem);
+				output.printMessage("Unidades retiradas!");
+				output.printMessage(productItem.getProductItemInfo());
 			} catch (InvalidParameterException e) {
-				System.out.println("Número de itens disponíveis insuficiente!");
-				System.out.println("Qauntidade disponível: " + productItem.getQuantity());
+				output.printMessage("Número de itens disponíveis insuficiente!\n" + 
+									"Qauntidade disponível: " + productItem.getQuantity());
 			}
 		}
 	}
 	
 	public void showInventory() {
 		for (ProductItem productItem : productItems.values()) {
-			outService.printMessage(productItem.getProductItemInfo());
+			output.printMessage(productItem.getProductItemInfo());
 		}
 	}
 	

@@ -5,14 +5,18 @@ import application.services.OutputService;
 
 public class MenuHandler {
 	
-	private OutputService outService = new OutputService();
+	private OutputService output;
+	
+	public MenuHandler(OutputService output) {
+		this.output = output;
+	}
 	
 	public void showMenu() {
-		outService.printMessage(" ".repeat(13) + "MENU" + " ".repeat(13));
-		outService.printEnum(MenuOptions.class, false);
+		output.printMessage(" ".repeat(13) + "MENU" + " ".repeat(13));
+		output.printEnum(MenuOptions.class, false);
 	}
 	
 	public void showHeader(String header) {
-		outService.printMessage(header.toUpperCase());
+		output.printMessage(header.toUpperCase());
 	}
 }

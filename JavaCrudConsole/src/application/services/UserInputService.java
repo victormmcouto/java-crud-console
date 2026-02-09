@@ -10,10 +10,12 @@ import model.enums.ProductCategory;
 public class UserInputService {
 	
 	private Scanner sc;
+	private OutputService output;
 	private InputValidationService validator = new InputValidationService();
 	
-	public UserInputService(Scanner sc) {
+	public UserInputService(Scanner sc, OutputService output) {
 		this.sc = sc;
+		this.output = output;
 	}
 	
 	public MenuOptions getOption() {
@@ -22,7 +24,7 @@ public class UserInputService {
 			try {
 				return validator.validateEnum(sc.next(), MenuOptions.class);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Insira uma opção válida!");
+				output.printMessage("Insira uma opção válida!");
 			}
 		}
 	}
@@ -36,7 +38,7 @@ public class UserInputService {
 				
 				return new Product(name, category, price);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Valor inválido!!");
+				output.printMessage("Valor inválido!!");
 			}
 		}
 	}
@@ -50,7 +52,7 @@ public class UserInputService {
 				
 				return new ProductItem(id, product, quantity);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Valor inválido!!");
+				output.printMessage("Valor inválido!!");
 			}
 		}
 	}
@@ -60,7 +62,7 @@ public class UserInputService {
 			try {
 				return validator.validateNumber(sc.next(), Integer.class);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Valor inválido!!");
+				output.printMessage("Valor inválido!!");
 			}
 		}
 	}
@@ -70,7 +72,7 @@ public class UserInputService {
 			try {
 				return validator.validateNumber(sc.next(), Integer.class);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Valor inválido!!");
+				output.printMessage("Valor inválido!!");
 			}
 		}
 	}
