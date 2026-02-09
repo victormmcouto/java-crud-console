@@ -8,6 +8,10 @@ import java.util.Map;
 public class Inventory {
 	private Map<Integer, ProductItem> productItems = new HashMap<>();
 	
+	public Map<Integer, ProductItem> getInventory() {
+		return productItems;
+	}
+	
 	public void addNewProductItem(ProductItem productItem) {
 		if (!productItems.containsKey(productItem.getId())) {
 			productItems.put(productItem.getId(), productItem);
@@ -50,10 +54,6 @@ public class Inventory {
 				System.out.println("Qauntidade disponível: " + productItem.getQuantity());
 			}
 		}
-	}
-	
-	public Map<Integer, ProductItem> getInventory() {
-		return productItems;
 	}
 	
 	public void showInventory() {
