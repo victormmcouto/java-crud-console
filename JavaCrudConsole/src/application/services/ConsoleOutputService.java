@@ -24,7 +24,7 @@ public class ConsoleOutputService implements OutputService {
 	@Override
 	public void printError(String message) {
 		printLine();
-		System.out.println("Erro: " + message);
+		System.err.println("Erro: " + message);
 		printLine();
 	}
 	
