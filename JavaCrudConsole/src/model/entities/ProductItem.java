@@ -75,7 +75,7 @@ public class ProductItem implements Comparable<ProductItem> {
 	}
 	
 	public String getProductItemInfo() {
-		return "ID: "  + id + "| " + product + "| Quantidade: " + quantity + 
+		return "ID: "  + id + "| " + product.getProductInfo() + "| Quantidade: " + quantity + 
 				"| Última modificação: " + timeModified.format(format);
 	}
 	
