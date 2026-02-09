@@ -11,7 +11,7 @@ public class OutputService {
 		System.out.println("-".repeat(30));
 	}
 	
-	public <E extends Enum<E>> void printEnum(Boolean transpose, Class<E> enumToShow) {
+	public <E extends Enum<E>> void printEnum(Class<E> enumToShow, Boolean transpose) {
 		printLine();
 		for (E enumItem : enumToShow.getEnumConstants()) {
 			if (transpose) {
