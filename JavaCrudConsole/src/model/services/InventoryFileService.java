@@ -55,7 +55,11 @@ public class InventoryFileService {
 	
 	public void saveData(Inventory inventory) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-			bw.write(inventory.toString());
+			if (!inventory.getInventory().isEmpty()) {
+				bw.write(inventory.toString());
+			} else {
+				bw.write("");
+			}
 		} catch (IOException e) {
 			System.out.println("Não foi possível realizar a escrita dos dados no arquivo " + filePath);
 			System.out.println(e.getMessage());
