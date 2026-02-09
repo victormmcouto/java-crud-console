@@ -25,6 +25,8 @@ public class InventoryFileService {
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
 			while(line != null) {
+				if (line.isEmpty() || line.isBlank()) break; 
+				
 				String[] record = line.split(",");
 				
 				Integer id = Integer.parseInt(record[0]);
