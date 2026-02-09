@@ -10,7 +10,7 @@ import model.enums.ProductCategory;
 public class UserInputService {
 	
 	private Scanner sc;
-	private InputValidationService validator;
+	private InputValidationService validator = new InputValidationService();
 	
 	public UserInputService(Scanner sc) {
 		this.sc = sc;
