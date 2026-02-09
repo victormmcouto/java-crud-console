@@ -2,7 +2,9 @@ package application.services;
 
 public class OutputService {
 	public void printMessage(String message) {
+		printLine("-", 30);
 		System.out.print(message);
+		printLine("-", 30);
 	}
 	
 	public void printLine(String toRepeat, Integer times) {
@@ -10,6 +12,7 @@ public class OutputService {
 	}
 	
 	public <E extends Enum<E>> void printEnum(Boolean transpose, Class<E> enumToShow) {
+		printLine("-", 30);
 		for (E enumItem : enumToShow.getEnumConstants()) {
 			if (transpose) {
 				System.out.print("|" + enumItem + "|");
@@ -17,5 +20,6 @@ public class OutputService {
 				System.out.println(enumItem);
 			}
 		}
+		printLine("-", 30);
 	}
 }
