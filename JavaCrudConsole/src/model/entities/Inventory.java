@@ -4,9 +4,13 @@ import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
 
+import application.services.OutputService;
+
 
 public class Inventory {
 	private Map<Integer, ProductItem> productItems = new HashMap<>();
+	
+	OutputService outService = new OutputService();
 	
 	public Map<Integer, ProductItem> getInventory() {
 		return productItems;
@@ -58,7 +62,7 @@ public class Inventory {
 	
 	public void showInventory() {
 		for (ProductItem productItem : productItems.values()) {
-			System.out.println(productItem.getProductItemInfo());
+			outService.printMessage(productItem.getProductItemInfo());
 		}
 	}
 	
