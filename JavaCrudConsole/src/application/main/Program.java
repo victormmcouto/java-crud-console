@@ -56,11 +56,13 @@ public class Program {
 						break;
 					} case SAIR: {
 						file.saveData(inventory);
-						inputService.closeService();
+						output.printMessage("Fim do processo!");
 						leave = true;
 						break;
 					}
 				}
+			
+				if (!leave) inputService.waitNextInput(); else inputService.closeService();
 			}
 		}
 	}

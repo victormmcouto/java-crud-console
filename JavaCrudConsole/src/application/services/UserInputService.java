@@ -93,4 +93,9 @@ public class UserInputService {
 	public void closeService() {
 		sc.close();
 	}
+	
+	public void waitNextInput() {
+		sc.nextLine(); //Consome quebra de linha do input anterior
+		sc.nextLine();
+	}
 }
