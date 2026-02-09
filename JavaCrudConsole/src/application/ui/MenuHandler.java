@@ -8,7 +8,7 @@ public class MenuHandler {
 	private OutputService outService = new OutputService();
 	
 	public void showMenu() {
-		outService.printMessage(" ".repeat(13) + "MENU" + " ".repeat(13) + "\n");
+		outService.printMessage(" ".repeat(13) + "MENU" + " ".repeat(13));
 		outService.printEnum(MenuOptions.class, false);
 	}
 	
