@@ -62,7 +62,7 @@ public class ProductItem implements Comparable<ProductItem> {
 	}
 	
 	public void productsOut(Integer quantity) {
-		if (quantity <= this.quantity) {
+		if (quantity > this.quantity) {
 			throw new InvalidParameterException();
 		}
 		this.quantity -= quantity;
