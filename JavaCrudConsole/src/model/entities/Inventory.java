@@ -8,7 +8,7 @@ import application.services.OutputService;
 
 
 public class Inventory {
-	private Map<Integer, ProductItem> productItems = new HashMap<>();
+	private Map<String, ProductItem> productItems = new HashMap<>();
 	
 	private OutputService output;
 	
@@ -16,7 +16,7 @@ public class Inventory {
 		this.output = output;
 	}
 	
-	public Map<Integer, ProductItem> getInventory() {
+	public Map<String, ProductItem> getInventory() {
 		return productItems;
 	}
 	
@@ -28,7 +28,7 @@ public class Inventory {
 		}
 	}
 	
-	public void removeProductItem(Integer productId) {
+	public void removeProductItem(String productId) {
 		if (productItems.remove(productId) == null) {
 			output.printMessage("O produto de id " + String.format("0000", productId) + " não existe!");
 		}
@@ -38,8 +38,8 @@ public class Inventory {
 		productItems.clear();
 	}
 	
-	public void stockIn(Integer productId, Integer quantity) {
-		if (productItems.containsKey(productId)) {
+	public void stockIn(String productId, Integer quantity) {
+		if (idExists(productId)) {
 			ProductItem productItem = productItems.get(productId);
 			
 			productItem.productsIn(quantity);
@@ -49,7 +49,7 @@ public class Inventory {
 		}
 	}
 	
-	public void stockOut(Integer productId, Integer quantity) {
+	public void stockOut(String productId, Integer quantity) {
 		if (productItems.containsKey(productId)) {
 			ProductItem productItem = productItems.get(productId);
 			
@@ -68,6 +68,10 @@ public class Inventory {
 		for (ProductItem productItem : productItems.values()) {
 			output.printMessage(productItem.getProductItemInfo());
 		}
+	}
+	
+	public Boolean idExists(String id) {
+		return productItems.containsKey(id);
 	}
 	
 	@Override

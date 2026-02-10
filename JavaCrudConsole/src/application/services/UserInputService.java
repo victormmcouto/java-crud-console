@@ -24,7 +24,7 @@ public class UserInputService {
 	}
 	
 	public Product getProduct() {
-		String name = getValidadtedString(getInput("Nome do produto: "));
+		String name = getValidatedString(getInput("Nome do produto: "));
 
 		output.printMessage("CATEGORIAS -> ");
 		output.printEnum(ProductCategory.class);
@@ -36,15 +36,14 @@ public class UserInputService {
 	}
 	
 	public ProductItem getProductItem() {
-		Integer id = getId();
 		Product product = getProduct();
 		Integer quantity = getQuantity();
 		
-		return new ProductItem(id, product, quantity);
+		return new ProductItem(product, quantity);
 	}
 	
-	public Integer getId() {
-		return getValidatedNumber(getInput("ID do produto: "), Integer.class);
+	public String getId() {
+		return getValidatedString(getInput("ID do produto: "));
 	}
 	
 	public Integer getQuantity() {
@@ -55,7 +54,7 @@ public class UserInputService {
 		return loop(() -> validator.validateNumber(getInput(inputMessage), numClass));
 	}
 	
-	public String getValidadtedString(String inputString) {
+	public String getValidatedString(String inputString) {
 		return loop(() -> validator.validateString(inputString));
 	}
 	

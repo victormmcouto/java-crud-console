@@ -41,16 +41,16 @@ public class Program {
 						inventory.addNewProductItem(newProductItem);
 						break;
 					} case DELETAR: {
-						Integer id = inputService.getId();
+						String id = inputService.getId();
 						inventory.removeProductItem(id);
 						break;
 					} case ADICIONAR: {
-						Integer id = inputService.getId();
+						String id = inputService.getId();
 						Integer quantity = inputService.getQuantity();
 						inventory.stockIn(id, quantity);
 						break;
 					} case RETIRAR: {
-						Integer id = inputService.getId();
+						String id = inputService.getId();
 						Integer quantity = inputService.getQuantity();
 						inventory.stockOut(id, quantity);
 						break;

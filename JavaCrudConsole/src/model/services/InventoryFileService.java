@@ -32,7 +32,7 @@ public class InventoryFileService {
 				
 				String[] record = line.split(",");
 				
-				Integer id = Integer.parseInt(record[0]);
+				String id = record[0];
 				String name = record[1];
 				ProductCategory category = ProductCategory.valueOf(record[2]);
 				Double price = Double.valueOf(record[3]);
