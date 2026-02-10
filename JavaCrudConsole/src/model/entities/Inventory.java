@@ -21,16 +21,14 @@ public class Inventory {
 	}
 	
 	public void addNewProductItem(ProductItem productItem) {
-		if (!productItems.containsKey(productItem.getId())) {
-			productItems.put(productItem.getId(), productItem);
-		} else {
-			output.printMessage("O produto de id " + String.format("0000", productItem.getId()) + " já existe!");
-		}
+		productItems.put(productItem.getId(), productItem);
 	}
 	
 	public void removeProductItem(String productId) {
 		if (productItems.remove(productId) == null) {
-			output.printMessage("O produto de id " + String.format("0000", productId) + " não existe!");
+			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
+		} else {
+			output.printError("Produto Removido!");
 		}
 	}
 	
