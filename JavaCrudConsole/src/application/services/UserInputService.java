@@ -11,18 +11,18 @@ public class UserInputService {
 	
 	private Scanner sc;
 	private OutputService output;
-	private InputValidationService validator = new InputValidationService();
+	private ValidationService validator;
 	
 	public UserInputService(Scanner sc, OutputService output) {
 		this.sc = sc;
 		this.output = output;
+		this.validator =  new ValidationService(output);
 	}
 	
 	public MenuOptions getOption() {
-		while (true) {
-			output.printInputMessage("Insira uma opção: ");			
+		while (true) {		
 			try {
-				return validator.validateEnum(sc.next(), MenuOptions.class);
+				return validator.validateEnum(getInput("Insira uma opção: "), MenuOptions.class);
 			} catch (IllegalArgumentException e) {
 				output.printMessage("Insira uma opção válida!");
 			}
@@ -32,16 +32,13 @@ public class UserInputService {
 	public Product getProduct() {
 		while (true) {
 			try {
-				output.printInputMessage("Nome do produto: ");
-				String name = validator.validateString(sc.next());
+				String name = validator.validateString(getInput("Nome do produto: "));
 
 				output.printMessage("CATEGORIAS -> ");
 				output.printEnum(ProductCategory.class);
-				output.printInputMessage("Categoria do produto: ");
-				ProductCategory category = validator.validateEnum(sc.next(), ProductCategory.class);
+				ProductCategory category = validator.validateEnum(getInput("Categoria do produto: "), ProductCategory.class);
 
-				output.printInputMessage("Preço: ");
-				Double price = validator.validateNumber(sc.next(), Double.class);
+				Double price = validator.validateNumber(getInput("Preço: "), Double.class);
 				
 				return new Product(name, category, price);
 			} catch (IllegalArgumentException e) {
@@ -53,13 +50,9 @@ public class UserInputService {
 	public ProductItem getProductItem() {
 		while (true) {
 			try {
-				output.printInputMessage("ID do produto: ");
-				Integer id = validator.validateNumber(sc.next(), Integer.class);
-				
+				Integer id = validator.validateNumber(getInput("ID do produto: "), Integer.class);
 				Product product = getProduct();
-				
-				output.printInputMessage("Quantidade: ");
-				Integer quantity = validator.validateNumber(sc.next(), Integer.class);
+				Integer quantity = validator.validateNumber(getInput("Quantidade: "), Integer.class);
 				
 				return new ProductItem(id, product, quantity);
 			} catch (IllegalArgumentException e) {
@@ -71,8 +64,7 @@ public class UserInputService {
 	public Integer getProductItemId() {
 		while (true) {
 			try {
-				output.printInputMessage("ID do produto: ");
-				return validator.validateNumber(sc.next(), Integer.class);
+				return validator.validateNumber(getInput("ID do produto: "), Integer.class);
 			} catch (IllegalArgumentException e) {
 				output.printMessage("Valor inválido! Deve ser um número inteiro!");
 			}
@@ -82,8 +74,7 @@ public class UserInputService {
 	public Integer getQuantity() {
 		while (true) {
 			try {
-				output.printInputMessage("Quantidaade: ");
-				return validator.validateNumber(sc.next(), Integer.class);
+				return validator.validateNumber(getInput("Quantidaade: "), Integer.class);
 			} catch (IllegalArgumentException e) {
 				output.printMessage("Valor inválido! Deve ser um número inteiro!");
 			}
@@ -92,6 +83,12 @@ public class UserInputService {
 	
 	public void closeService() {
 		sc.close();
+	}
+	
+	public String getInput(String inputMessage) {
+		sc.nextLine();
+		output.printInputMessage(inputMessage);
+		return sc.nextLine();
 	}
 	
 	public void waitNextInput() {
