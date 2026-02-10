@@ -17,15 +17,15 @@ public class ValidationService {
 			} else if (type == BigInteger.class) {
 				return type.cast(new BigInteger(value));
 			} 
-			throw new IllegalArgumentException("Tipo não suportado");
+			throw new IllegalArgumentException("Valor inválido!");
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Tipo não suportado");	
+			throw new IllegalArgumentException("Valor inválido!");	
 		}
 	}
 	
 	public String validateString(String value) {
-		if (value == null || value == "") {
-			System.out.println("Valor inválido!");
+		if (value == null || value.isEmpty()|| value.isBlank()) {
+			throw new IllegalArgumentException("Valor inválido!");	
 		}
 		return value;
 	}
