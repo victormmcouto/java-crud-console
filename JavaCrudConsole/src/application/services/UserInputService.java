@@ -1,6 +1,7 @@
 package application.services;
 
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 import application.enums.MenuOptions;
 import model.entities.Product;
@@ -11,84 +12,75 @@ public class UserInputService {
 	
 	private Scanner sc;
 	private OutputService output;
-	private ValidationService validator;
+	private ValidationService validator =  new ValidationService();
 	
 	public UserInputService(Scanner sc, OutputService output) {
 		this.sc = sc;
 		this.output = output;
-		this.validator =  new ValidationService(output);
 	}
 	
 	public MenuOptions getOption() {
-		while (true) {		
-			try {
-				return validator.validateEnum(getInput("Insira uma opção: "), MenuOptions.class);
-			} catch (IllegalArgumentException e) {
-				output.printMessage("Insira uma opção válida!");
-			}
-		}
+		return getValidatedEnumValue(getInput("Insira uma opção: "), MenuOptions.class);
 	}
 	
 	public Product getProduct() {
-		while (true) {
-			try {
-				String name = validator.validateString(getInput("Nome do produto: "));
+		String name = getValidadtedString(getInput("Nome do produto: "));
 
-				output.printMessage("CATEGORIAS -> ");
-				output.printEnum(ProductCategory.class);
-				ProductCategory category = validator.validateEnum(getInput("Categoria do produto: "), ProductCategory.class);
+		output.printMessage("CATEGORIAS -> ");
+		output.printEnum(ProductCategory.class);
+		ProductCategory category = getValidatedEnumValue(getInput("Categoria do produto: "), ProductCategory.class);
 
-				Double price = validator.validateNumber(getInput("Preço: "), Double.class);
-				
-				return new Product(name, category, price);
-			} catch (IllegalArgumentException e) {
-				output.printError("Valor inválido!!");
-			}
-		}
+		Double price = getValidatedNumber(getInput("Preço: "), Double.class);
+		
+		return new Product(name, category, price);
 	}
 	
 	public ProductItem getProductItem() {
-		while (true) {
-			try {
-				Integer id = validator.validateNumber(getInput("ID do produto: "), Integer.class);
-				Product product = getProduct();
-				Integer quantity = validator.validateNumber(getInput("Quantidade: "), Integer.class);
-				
-				return new ProductItem(id, product, quantity);
-			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido!!");
-			}
-		}
+		Integer id = getId();
+		Product product = getProduct();
+		Integer quantity = getQuantity();
+		
+		return new ProductItem(id, product, quantity);
 	}
 	
-	public Integer getProductItemId() {
-		while (true) {
-			try {
-				return validator.validateNumber(getInput("ID do produto: "), Integer.class);
-			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido! Deve ser um número inteiro!");
-			}
-		}
+	public Integer getId() {
+		return getValidatedNumber(getInput("ID do produto: "), Integer.class);
 	}
 	
 	public Integer getQuantity() {
-		while (true) {
-			try {
-				return validator.validateNumber(getInput("Quantidaade: "), Integer.class);
-			} catch (IllegalArgumentException e) {
-				output.printMessage("Valor inválido! Deve ser um número inteiro!");
-			}
-		}
+		return getValidatedNumber(getInput("Quantidade: "), Integer.class);
 	}
 	
-	public void closeService() {
-		sc.close();
+	public <N extends Number> N getValidatedNumber(String inputMessage, Class<N> numClass) {
+		return loop(() -> validator.validateNumber(getInput(inputMessage), numClass));
+	}
+	
+	public String getValidadtedString(String inputString) {
+		return loop(() -> validator.validateString(inputString));
+	}
+	
+	public <E extends Enum<E>> E getValidatedEnumValue(String inputMessage, Class<E> enumClass) {
+		return loop(() -> validator.validateEnum(getInput(inputMessage), enumClass));
 	}
 	
 	public String getInput(String inputMessage) {
 		sc.nextLine();
 		output.printInputMessage(inputMessage);
 		return sc.nextLine();
+	}
+	
+	public <T> T loop(Supplier<T> action) {
+		while (true) {
+			try {
+				action.get();
+			} catch(IllegalArgumentException e) {
+				output.printError(e.getMessage());
+			}
+		}
+	}
+	
+	public void closeService() {
+		sc.close();
 	}
 	
 	public void waitNextInput() {
