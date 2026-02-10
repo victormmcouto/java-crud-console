@@ -6,38 +6,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class ProductItem implements Comparable<ProductItem> {
-	private Integer id;
+	private String id;
 	private Product product;
 	private Integer quantity;
 	private LocalDateTime timeModified;
 	
 	private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-
-	public ProductItem(Integer id) {
-		this.id = id;
-		timeModified = LocalDateTime.now();
-	}
+	private DateTimeFormatter idFormat = DateTimeFormatter.ofPattern("yyMdss");
 	
-	public ProductItem(Integer id, Product product, Integer quantity) {
-		this.id = id;
+	public ProductItem(Product product, Integer quantity) {
 		this.product = product;
 		this.quantity = quantity;
 		timeModified = LocalDateTime.now();
+		this.id = LocalDateTime.now().format(idFormat);
 	}
 	
-	public ProductItem(Integer id, Product product, Integer quantity, LocalDateTime timeModified) {
+	public ProductItem(String id, Product product, Integer quantity, LocalDateTime timeModified) {
 		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
 		this.timeModified = timeModified;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Product getProduct() {
