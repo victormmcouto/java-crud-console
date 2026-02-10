@@ -8,23 +8,24 @@ O projeto visa aplicar os conceitos de OOP, para desenvolver uma aplicação que
 
 ## Funcionalidades
 - LISTAR
-  Ver as informações de todos os itens presentes no estoque
+  * Ver as informações de todos os itens presentes no estoque
 - CADASTRAR
-  Incluir um novo item ao estoque
+  * Incluir um novo item ao estoque
 - DELETAR
-  Apagar um item presente no estoque
+  * Apagar um item presente no estoque
 - ADICIONAR
-  Incluir certa quantidade de um produto do estoque
+  * Incluir certa quantidade de um produto do estoque
 - RETIRAR
-  Retirar certa quantidade de um produto do estoque
+  * Retirar certa quantidade de um produto do estoque
 - SAIR
-  Sair da aplicação e encerrar o processo
+  * Sair da aplicação e encerrar o processo
 
 ## Tecnologias Utilizadas
 - Java JDK 21
 - Console
 
 ## Estrutura do Projeto
+```text
 java-crud-console/
   ├─ README.md
   ├─ src/
