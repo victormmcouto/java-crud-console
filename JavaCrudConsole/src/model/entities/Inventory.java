@@ -8,12 +8,18 @@ import application.services.OutputService;
 
 
 public class Inventory {
-	private Map<String, ProductItem> productItems = new HashMap<>();
+	private Map<String, ProductItem> productItems;
 	
 	private OutputService output;
 	
+	public Inventory(Map<String, ProductItem> productItems, OutputService output) {
+		this.output = output;
+		this.productItems = productItems;
+	}
+	
 	public Inventory(OutputService output) {
 		this.output = output;
+		this.productItems = new HashMap<>();
 	}
 	
 	public Map<String, ProductItem> getInventory() {

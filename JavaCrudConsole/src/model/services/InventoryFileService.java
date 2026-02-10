@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import application.services.OutputService;
 import model.entities.Inventory;
@@ -23,7 +25,7 @@ public class InventoryFileService {
 	}
 	
 	public Inventory loadData() {
-		Inventory inventory = new Inventory(output);
+		Map<String, ProductItem> productItems = new HashMap<>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line = br.readLine();
@@ -42,7 +44,7 @@ public class InventoryFileService {
 				Product product = new Product(name, category, price);
 				ProductItem productItem = new ProductItem(id, product, quantity, timeModified);
 				
-				inventory.addNewProductItem(productItem);
+				productItems.put(id, productItem);
 				
 				line = br.readLine();
 			}
@@ -53,7 +55,7 @@ public class InventoryFileService {
 			return null;
 		} 
 		
-		return inventory;
+		return new Inventory(productItems, output);
 	}
 	
 	public void saveData(Inventory inventory) {
