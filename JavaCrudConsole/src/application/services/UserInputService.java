@@ -20,17 +20,17 @@ public class UserInputService {
 	}
 	
 	public MenuOptions getOption() {
-		return getValidatedEnumValue(getInput("Insira uma opção: "), MenuOptions.class);
+		return getValidatedEnumValue("Insira uma opção: ", MenuOptions.class);
 	}
 	
 	public Product getProduct() {
-		String name = getValidatedString(getInput("Nome do produto: "));
+		String name = getValidatedString("Nome do produto: ");
 
 		output.printMessage("CATEGORIAS -> ");
 		output.printEnum(ProductCategory.class);
-		ProductCategory category = getValidatedEnumValue(getInput("Categoria do produto: "), ProductCategory.class);
+		ProductCategory category = getValidatedEnumValue("Categoria do produto: ", ProductCategory.class);
 
-		Double price = getValidatedNumber(getInput("Preço: "), Double.class);
+		Double price = getValidatedNumber("Preço: ", Double.class);
 		
 		return new Product(name, category, price);
 	}
@@ -43,19 +43,19 @@ public class UserInputService {
 	}
 	
 	public String getId() {
-		return getValidatedString(getInput("ID do produto: "));
+		return getValidatedString("ID do produto: ");
 	}
 	
 	public Integer getQuantity() {
-		return getValidatedNumber(getInput("Quantidade: "), Integer.class);
+		return getValidatedNumber("Quantidade: ", Integer.class);
 	}
 	
 	public <N extends Number> N getValidatedNumber(String inputMessage, Class<N> numClass) {
 		return loop(() -> validator.validateNumber(getInput(inputMessage), numClass));
 	}
 	
-	public String getValidatedString(String inputString) {
-		return loop(() -> validator.validateString(inputString));
+	public String getValidatedString(String inputMessage ) {
+		return loop(() -> validator.validateString(getInput(inputMessage)));
 	}
 	
 	public <E extends Enum<E>> E getValidatedEnumValue(String inputMessage, Class<E> enumClass) {
@@ -63,7 +63,7 @@ public class UserInputService {
 	}
 	
 	public String getInput(String inputMessage) {
-		sc.nextLine();
+		//sc.nextLine();
 		output.printInputMessage(inputMessage);
 		return sc.nextLine();
 	}
@@ -71,7 +71,7 @@ public class UserInputService {
 	public <T> T loop(Supplier<T> action) {
 		while (true) {
 			try {
-				action.get();
+				return action.get();
 			} catch(IllegalArgumentException e) {
 				output.printError(e.getMessage());
 			}
@@ -83,7 +83,7 @@ public class UserInputService {
 	}
 	
 	public void waitNextInput() {
-		sc.nextLine(); //Consome quebra de linha do input anterior
+		//sc.nextLine(); //Consome quebra de linha do input anterior
 		sc.nextLine();
 	}
 }
