@@ -44,11 +44,13 @@ public class Inventory {
 			
 			output.printMessage("Unidades acrescentadas!");
 			output.printMessage(productItem.getProductItemInfo());
+		} else {
+			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
 		}
 	}
 	
 	public void stockOut(String productId, Integer quantity) {
-		if (productItems.containsKey(productId)) {
+		if (idExists(productId)) {
 			ProductItem productItem = productItems.get(productId);
 			
 			try {
@@ -59,6 +61,8 @@ public class Inventory {
 				output.printMessage("Número de itens disponíveis insuficiente!\n" + 
 									"Qauntidade disponível: " + productItem.getQuantity());
 			}
+		} else {
+			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
 		}
 	}
 	
