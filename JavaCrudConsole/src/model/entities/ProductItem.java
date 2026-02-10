@@ -12,7 +12,7 @@ public class ProductItem implements Comparable<ProductItem> {
 	private LocalDateTime timeModified;
 	
 	private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-	private DateTimeFormatter idFormat = DateTimeFormatter.ofPattern("yyMdss");
+	private DateTimeFormatter idFormat = DateTimeFormatter.ofPattern("yyMMddss");
 	
 	public ProductItem(Product product, Integer quantity) {
 		this.product = product;
