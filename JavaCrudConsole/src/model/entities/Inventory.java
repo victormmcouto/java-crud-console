@@ -22,6 +22,8 @@ public class Inventory {
 	
 	public void addNewProductItem(ProductItem productItem) {
 		productItems.put(productItem.getId(), productItem);
+		output.printMessage("Produto Adicionado!");
+		output.printMessage(productItem.getProductItemInfo());
 	}
 	
 	public void removeProductItem(String productId) {
