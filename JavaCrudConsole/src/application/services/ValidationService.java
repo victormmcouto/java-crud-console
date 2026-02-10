@@ -3,7 +3,7 @@ package application.services;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class InputValidationService {
+public class ValidationService {
 	public <T extends Number> T validateNumber(String value, Class<T> type) {
 		try {
 			if (type == Integer.class) {
