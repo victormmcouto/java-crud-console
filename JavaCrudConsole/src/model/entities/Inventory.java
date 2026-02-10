@@ -28,7 +28,7 @@ public class Inventory {
 	
 	public void removeProductItem(String productId) {
 		if (productItems.remove(productId) == null) {
-			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
+			output.printError("O produto de id " + productId + " não existe!");
 		} else {
 			output.printError("Produto Removido!");
 		}
@@ -47,7 +47,7 @@ public class Inventory {
 			output.printMessage("Unidades acrescentadas!");
 			output.printMessage(productItem.getProductItemInfo());
 		} else {
-			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
+			output.printError("O produto de id " + productId + " não existe!");
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class Inventory {
 									"Qauntidade disponível: " + productItem.getQuantity());
 			}
 		} else {
-			output.printError("O produto de id " + String.format("00000000", productId) + " não existe!");
+			output.printError("O produto de id " + productId + " não existe!");
 		}
 	}
 	
