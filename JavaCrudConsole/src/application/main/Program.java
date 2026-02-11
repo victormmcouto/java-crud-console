@@ -21,7 +21,7 @@ public class Program {
 		
 		MenuHandler mh = new MenuHandler(output);
 		UserInputService inputService = new UserInputService(new Scanner(System.in), output);
-		InventoryFileService file = new InventoryFileService("C:\\Temp\\invenotry.csv", output);
+		InventoryFileService file = new InventoryFileService("C:\\Temp\\inventory.csv", output);
 		Inventory inventory = file.loadData();
 		
 		Boolean leave = false;
