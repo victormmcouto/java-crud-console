@@ -40,3 +40,6 @@ java-crud-console/
   |        └─ enums/
   └─ assets/
       └─ imagens/
+           └─ UML-Class-Diagram.png
+```
+![Diagrama de Classes do Projeto](assets/imagens/UML-Class-Diagram.png)
