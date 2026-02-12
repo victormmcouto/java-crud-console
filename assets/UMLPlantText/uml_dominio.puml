@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package application {
+  interface OutputService
+  class ConsoleOutputService
+  class UserInputService
+}
+
+package model {
+  class Inventory
+  class Product
+  class ProductItem
+  enum ProductCategory
+}
+
+ConsoleOutputService ..|> OutputService
+UserInputService --> OutputService
+
+Inventory *-- "0..*" ProductItem
+ProductItem --> Product
+Product --> ProductCategory
+
+@enduml

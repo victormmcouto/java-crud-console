@@ -1,0 +1,137 @@
+@startuml
+skinparam classAttributeIconSize 0
+package application {
+  package enums {
+    enum MenuOptions {
+      LISTAR
+      CADASTRAR
+      DELETAR
+      ADICIONAR
+      RETIRAR
+      SAIR
+    }
+  }
+  
+  package services {
+    class ConsoleOutputService {
+      - printLine() : void
+    }
+    
+    interface OutputService {
+      + printMessage(message : String) : void
+      + printError(message : String) : void
+      + printInputMessage(message : String) : void
+      + printEnum<E extends Enum<E>>(Class<E> enumToShow) : void;
+    }
+    
+    class UserInputService {
+      - sc : Scanner
+      - output : OutputService
+      - validator : ValidationService
+      + getOption : MenuOptions
+      + getProduct : Product
+      + getProductItem : ProductItem
+      + getId : String
+      + getQuantity : Integer
+      + getValidatedNumber<N extends Number>(inputMessage : String, Class<N> numClass) : N
+      + getValidatedEnumValue<E extends Enum<E>>(inputMessage : String, Class<E> enumClass) : E
+      + getValidatedString(printinputMessage : String) : String
+      + getInput(inputMessage : String) : String
+      + closeService() : void
+      + waitNextInput() : void
+      - loop<T>(action : Supplier<T>) : T
+    }
+    
+    class ValidationService {
+      + validateNumber<T extends Number>(value : String, Class<T> type) : T
+      + validateEnum<E extends Enum<E>>(value : String, Class<E> type) : E
+      + validateString(value: String) : String
+    }
+  }
+  
+  package ui {
+    class MenuHandler {
+      - output : OutputService
+      + showMenu() : void
+      + showHeader(header : String) : void
+    }
+  }
+}
+package model {
+  package enums {
+    enum ProductCategory {
+      ROUPA
+      ELETRONICO
+      ESCRITORIO
+      COMIDA
+      BEBIDA
+      HIGIENE_PESSOAL
+      LIVRO
+    }
+  }
+  
+  package services {
+    class InventoryFileService {
+      - filePath : String
+      - output : OutputService
+      + loadData() : Inventory
+      + saveData(inventory : Inventory) : void
+    }
+  }
+  
+  package entities {
+    class Inventory {
+      - output : OutputService
+      - productItems : Map<String, ProductItem>
+      + getInventory() : Map<String, ProductItem>
+      + addNewProductItem(productItem : ProductItem) : void
+      + removeProductItem(productId : String) : void
+      + erase() : void
+      + stockIn(productId : String, quantity : Integer) : void
+      + stockOut(productId : String, quantity : Integer) : void
+      + showInventory() : void
+      + idExists(id : String) : Boolean
+      + addNewProductItemFromFile(productItem : ProductItem) : void
+    }
+    
+    class Product {
+      - name : String
+      - category : ProductCategory
+      - price : Double
+      + getProductInfo() : String
+    }
+    
+    class ProductItem {
+      - id : String
+      - product : Product
+      - quantity : Integer
+      {static} - DATETIME_FORMAT : DateTimeFormatter {readOnly}
+      {static} - ID_FORMAT : DateTimeFormatter
+      + totalValue() : Double
+      + productsOut(quantity : Integer) : void
+      + productsIn(quantity : Integer) : void
+      + getProductItemInfo() : String
+    }
+  }
+}
+
+ConsoleOutputService ..|> OutputService
+
+UserInputService *-- ValidationService
+UserInputService --> OutputService
+UserInputService ..> MenuOptions
+UserInputService ..> Product
+UserInputService ..> ProductItem
+
+MenuHandler --> OutputService
+
+Inventory --> OutputService
+Inventory *-- "0..*" ProductItem
+
+Product --> ProductCategory
+
+ProductItem --> Product
+
+InventoryFileService --> OutputService
+InventoryFileService ..> Inventory
+@enduml
