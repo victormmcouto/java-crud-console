@@ -1,11 +1,9 @@
 ,
 # java-crud-console
 
-CRUD via console de um sistema de gerenciamento de items de produtos em um inventário, armazenados em um arquivo .csv, aplicando conhecimentos em OOP Java.
-
 ## Visão Geral 
 
-O projeto visa aplicar os conceitos de OOP, para desenvolver uma aplicação que permita o gerenciamento de items em um estoque, podendo ser aplicado em pequenas escalas visando automação das atividades corriqueiras em um estoque.
+Sistema de controle de inventário desenvolvido em Java, com operações CRUD e armazenamento de dados em arquivos CSV. O projeto aplica conceitos de Programação Orientada a Objetos para organização e manipulação de produtos.
 
 ## Funcionalidades
 - LISTAR
