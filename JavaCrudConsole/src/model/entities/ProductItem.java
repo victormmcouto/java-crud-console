@@ -11,14 +11,14 @@ public class ProductItem implements Comparable<ProductItem> {
 	private Integer quantity;
 	private LocalDateTime timeModified;
 	
-	private DateTimeFormatter dateModifiedFormat = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-	private DateTimeFormatter idFormat = DateTimeFormatter.ofPattern("yyMMddss");
+	private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+	private static final DateTimeFormatter ID_FORMAT = DateTimeFormatter.ofPattern("yyMMddss");
 	
 	public ProductItem(Product product, Integer quantity) {
 		this.product = product;
 		this.quantity = quantity;
 		timeModified = LocalDateTime.now();
-		this.id = LocalDateTime.now().format(idFormat);
+		this.id = LocalDateTime.now().format(ID_FORMAT);
 	}
 	
 	public ProductItem(String id, Product product, Integer quantity, LocalDateTime timeModified) {
@@ -70,7 +70,7 @@ public class ProductItem implements Comparable<ProductItem> {
 		return "ID: "  + id + 
 				product.getProductInfo() +
 				"\nQuantidade: " + quantity + 
-				"\nÚltima modificação: " + timeModified.format(dateModifiedFormat);
+				"\nÚltima modificação: " + timeModified.format(DATETIME_FORMAT);
 	}
 	
 	@Override
