@@ -17,7 +17,7 @@ package model {
 ConsoleOutputService ..|> OutputService
 UserInputService --> OutputService
 
-Inventory *-- "0..*" ProductItem
+Inventory o-- "0..*" ProductItem
 ProductItem --> Product
 Product --> ProductCategory
 

@@ -126,7 +126,7 @@ UserInputService ..> ProductItem
 MenuHandler --> OutputService
 
 Inventory --> OutputService
-Inventory *-- "0..*" ProductItem
+Inventory o-- "0..*" ProductItem
 
 Product --> ProductCategory
 
