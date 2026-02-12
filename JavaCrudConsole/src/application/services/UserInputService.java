@@ -49,7 +49,7 @@ public class UserInputService {
 	public Integer getQuantity() {
 		return getValidatedNumber("Quantidade: ", Integer.class);
 	}
-	
+
 	public <N extends Number> N getValidatedNumber(String inputMessage, Class<N> numClass) {
 		return loop(() -> validator.validateNumber(getInput(inputMessage), numClass));
 	}
@@ -68,7 +68,7 @@ public class UserInputService {
 		return sc.nextLine();
 	}
 	
-	public <T> T loop(Supplier<T> action) {
+	private <T> T loop(Supplier<T> action) {
 		while (true) {
 			try {
 				return action.get();

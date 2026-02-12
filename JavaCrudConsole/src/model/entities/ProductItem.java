@@ -11,7 +11,7 @@ public class ProductItem implements Comparable<ProductItem> {
 	private Integer quantity;
 	private LocalDateTime timeModified;
 	
-	private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+	private DateTimeFormatter dateModifiedFormat = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
 	private DateTimeFormatter idFormat = DateTimeFormatter.ofPattern("yyMMddss");
 	
 	public ProductItem(Product product, Integer quantity) {
@@ -70,7 +70,7 @@ public class ProductItem implements Comparable<ProductItem> {
 		return "ID: "  + id + 
 				product.getProductInfo() +
 				"\nQuantidade: " + quantity + 
-				"\nÚltima modificação: " + timeModified.format(format);
+				"\nÚltima modificação: " + timeModified.format(dateModifiedFormat);
 	}
 	
 	@Override

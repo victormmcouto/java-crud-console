@@ -31,7 +31,7 @@ public class InventoryFileService {
 			String line = br.readLine();
 			while(line != null) {
 				if (line.isEmpty() || line.isBlank()) break; 
-				
+	
 				String[] record = line.split(",");
 				
 				String id = record[0];

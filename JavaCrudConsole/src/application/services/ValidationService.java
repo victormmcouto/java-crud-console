@@ -30,8 +30,8 @@ public class ValidationService {
 		return value;
 	}
 	
-	public <E extends Enum<E>> E validateEnum(String value, Class<E> tipo) {
-		for (E enum_ : tipo.getEnumConstants()) {
+	public <E extends Enum<E>> E validateEnum(String value, Class<E> type) {
+		for (E enum_ : type.getEnumConstants()) {
 			if (enum_.name().equalsIgnoreCase(value)) {
 				return enum_;
 			}
