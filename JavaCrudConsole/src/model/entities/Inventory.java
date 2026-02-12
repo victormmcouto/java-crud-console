@@ -6,32 +6,25 @@ import java.util.Map;
 
 import application.services.OutputService;
 
-
 public class Inventory {
-	private Map<String, ProductItem> productItems;
-	
+	private Map<String, ProductItem> productItems = new HashMap<>();;
+
 	private OutputService output;
-	
-	public Inventory(Map<String, ProductItem> productItems, OutputService output) {
-		this.output = output;
-		this.productItems = productItems;
-	}
-	
+
 	public Inventory(OutputService output) {
 		this.output = output;
-		this.productItems = new HashMap<>();
 	}
-	
+
 	public Map<String, ProductItem> getInventory() {
 		return productItems;
 	}
-	
+
 	public void addNewProductItem(ProductItem productItem) {
 		productItems.put(productItem.getId(), productItem);
 		output.printMessage("Produto Adicionado!");
 		output.printMessage(productItem.getProductItemInfo());
 	}
-	
+
 	public void removeProductItem(String productId) {
 		if (productItems.remove(productId) == null) {
 			output.printError("O produto de id " + productId + " não existe!");
@@ -39,57 +32,62 @@ public class Inventory {
 			output.printError("Produto Removido!");
 		}
 	}
-	
+
 	public void erase() {
 		productItems.clear();
 	}
-	
+
 	public void stockIn(String productId, Integer quantity) {
 		if (idExists(productId)) {
 			ProductItem productItem = productItems.get(productId);
-			
+
 			productItem.productsIn(quantity);
-			
+
 			output.printMessage("Unidades acrescentadas!");
 			output.printMessage(productItem.getProductItemInfo());
 		} else {
 			output.printError("O produto de id " + productId + " não existe!");
 		}
 	}
-	
+
 	public void stockOut(String productId, Integer quantity) {
 		if (idExists(productId)) {
 			ProductItem productItem = productItems.get(productId);
-			
+
 			try {
 				productItem.productsOut(quantity);
 				output.printMessage("Unidades retiradas!");
 				output.printMessage(productItem.getProductItemInfo());
 			} catch (InvalidParameterException e) {
-				output.printMessage("Número de itens disponíveis insuficiente!\n" + 
-									"Qauntidade disponível: " + productItem.getQuantity());
+				output.printMessage("Número de itens disponíveis insuficiente!\n" + "Qauntidade disponível: "
+						+ productItem.getQuantity());
 			}
 		} else {
 			output.printError("O produto de id " + productId + " não existe!");
 		}
 	}
-	
+
 	public void showInventory() {
 		for (ProductItem productItem : productItems.values()) {
 			output.printMessage(productItem.getProductItemInfo());
 		}
 	}
-	
+
 	public Boolean idExists(String id) {
 		return productItems.containsKey(id);
 	}
 	
+	public void addNewProductItemFromFile(ProductItem productItem) {
+		productItems.put(productItem.getId(), productItem);
+	}
+	
 	@Override
 	public String toString() {
-		if (productItems.isEmpty()) return "Inventório vazio!";
-		
+		if (productItems.isEmpty())
+			return "Inventório vazio!";
+
 		String inventoryList = "";
-		
+
 		for (ProductItem productItem : productItems.values()) {
 			inventoryList += productItem.toString() + System.lineSeparator();
 		}
