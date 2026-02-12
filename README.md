@@ -44,7 +44,7 @@ java-crud-console/
       |     └─ uml_implementacao.png
       └─ UMLPlantText/
             ├─ uml_dominio.puml
-            └─ uml_implementação.puml
+            └─ uml_implementacao.puml
 ```
 
 ### Diagrama de classes UML para domínio
