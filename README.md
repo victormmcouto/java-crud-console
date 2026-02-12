@@ -42,4 +42,5 @@ java-crud-console/
       └─ imagens/
            └─ UML-Class-Diagram.png
 ```
+### Diagrama de classes UML para domínio
 ![Diagrama de Classes do Projeto](assets/imagens/uml_dominio.png)
