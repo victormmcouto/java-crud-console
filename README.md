@@ -39,9 +39,14 @@ java-crud-console/
   |        ├─ services/
   |        └─ enums/
   └─ assets/
-      └─ imagens/
-           └─ UML-Class-Diagram.png
-```
+      ├─ imagens/
+      |     ├─ uml_dominio.png
+      |     └─ uml_implementacao.png
+      └─ UMLPlantText/
+            ├─ uml_dominio.puml
+            └─ uml_implementação.puml
+´´´
+
 ### Diagrama de classes UML para domínio
 ![Diagrama de Classes do Projeto](assets/imagens/uml_dominio.png)
 
