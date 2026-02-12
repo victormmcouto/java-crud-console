@@ -1,6 +1,7 @@
+,
 # java-crud-console
 
-CRUD via console de um sistema de gerenciamento de items de produto em um inventário, armazenados em um arquivo .csv, aplicando conhecimentos em OOP Java.
+CRUD via console de um sistema de gerenciamento de items de produtos em um inventário, armazenados em um arquivo .csv, aplicando conhecimentos em OOP Java.
 
 ## Visão Geral 
 
